@@ -50,6 +50,10 @@ function init(player, OPPONENT){
                 ctx.strokeStyle = "#000";
                 ctx.strokeRect(j*SPACE_SIZE, i*SPACE_SIZE, SPACE_SIZE, SPACE_SIZE);
 
+                // Print the ID and coordinates
+                ctx.font = "16px Arial";
+                ctx.fillStyle = "black";
+                ctx.fillText(`id: ${id} [i, j] =[${i},${j}]`, j * SPACE_SIZE + SPACE_SIZE / 6 , i * SPACE_SIZE + SPACE_SIZE / 2);
             }
         }
     }
