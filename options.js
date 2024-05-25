@@ -14,6 +14,13 @@ const playBtn = options.querySelector(".play")
 //SOME VARIABLES TO STORE USERS OPTION
 let OPPONENT;
 let player = new Object;
+
+//SWITCH ACTIVE CLASS BETWEEN TWO ELEMENTS
+function switchActive(off,on){
+    off.classList.remove("active");
+    on.classList.add("active")
+}
+
 //ADD AND EVENT LISTENER TO EVERY BUTTON
 computerBtn.addEventListener("click",function(){
     OPPONENT = "computer";
@@ -59,8 +66,3 @@ playBtn.addEventListener("click",function(){
     options.classList.add("hide");
 });
 
-//SWITCH ACTIVE CLASS BETWEEN TWO ELEMENTS
-function switchActive(off,on){
-    off.classList.remove("active");
-    on.classList.add("active")
-}
