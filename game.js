@@ -14,7 +14,7 @@ export function init(player, OPPONENT) {
   const SPACE_SIZE = 150
 
   //STORE PLAYERS MOVE
-  let gameData = new Array(9)
+  let gameData = new Array(9).fill(null)
 
   //By default the first player to play is the human
   let currentPlayer = player.man

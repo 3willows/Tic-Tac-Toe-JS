@@ -5,7 +5,7 @@ import { isWinner, isTie } from "./game.js"
 function getEmptySpaces(gameData) {
   let EMPTY = []
   for (let id = 0; id < gameData.length; id++) {
-    if (!gameData[id]) EMPTY.push(id)
+    if (gameData[id] === null) EMPTY.push(id)
   }
   return EMPTY
 }
