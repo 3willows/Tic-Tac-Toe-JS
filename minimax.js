@@ -16,7 +16,7 @@ export function minimax(gameData, PLAYER) {
   if (isWinner(gameData, player.man)) return { evaluation: -10 }
   if (isTie(gameData)) return { evaluation: 0 }
 
-  //look for empty spaces
+  //get all indices of empty spaces
   let EMPTY = getEmptySpaces(gameData)
 
   //save the moves and their evualuation
@@ -49,27 +49,30 @@ export function minimax(gameData, PLAYER) {
     moves.push(move)
   }
 
-  // minimax algorithm
-  let bestMove
+  return minimaxCore(PLAYER, moves)
+}
 
-  if (PLAYER === player.computer) {
-    //maximizer
-    let bestEvaluation = -Infinity
-    for (let i = 0; i < moves.length; i++) {
-      if (moves[i].evaluation > bestEvaluation) {
-        bestEvaluation = moves[i].evaluation
-        bestMove = moves[i]
-      }
-    }
-  } else {
-    //maximizer
-    let bestEvaluation = +Infinity
-    for (let i = 0; i < moves.length; i++) {
-      if (moves[i].evaluation < bestEvaluation) {
-        bestEvaluation = moves[i].evaluation
-        bestMove = moves[i]
-      }
-    }
-  }
-  return bestMove
+function minimaxCore(PLAYER, moves){
+   let bestMove
+
+   if (PLAYER === player.computer) {
+     //maximizer
+     let bestEvaluation = -Infinity
+     for (let i = 0; i < moves.length; i++) {
+       if (moves[i].evaluation > bestEvaluation) {
+         bestEvaluation = moves[i].evaluation
+         bestMove = moves[i]
+       }
+     }
+   } else {
+     //minimizer?
+     let bestEvaluation = +Infinity
+     for (let i = 0; i < moves.length; i++) {
+       if (moves[i].evaluation < bestEvaluation) {
+         bestEvaluation = moves[i].evaluation
+         bestMove = moves[i]
+       }
+     }
+   }
+   return bestMove
 }
