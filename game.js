@@ -76,8 +76,10 @@ function init(player, OPPONENT){
         let id = board[i][j];
         
         //Prevent the player to play the same space twice
-        if(gameData[id]) return;
-
+        if(gameData[id]) {
+            alert("This space is already occupied")
+            return;
+        }
         // store the players move to gameData
         gameData[id] = currentPlayer;
         console.log(gameData);
