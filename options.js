@@ -1,7 +1,9 @@
+import {init} from "./game.js"
+
 // OPTIONS CODE
 //SELECT ELEMENTS
 const options = document.querySelector(".options")
-const gameOverElement = document.querySelector(".gameover")
+export const gameOverElement = document.querySelector(".gameover")
 
 //SELECT BUTTONS
 const computerBtn = options.querySelector(".computer")
@@ -13,7 +15,7 @@ const playBtn = options.querySelector(".play")
 
 //SOME VARIABLES TO STORE USERS OPTION
 let OPPONENT;
-let player = new Object;
+export let player = new Object;
 
 //SWITCH ACTIVE CLASS BETWEEN TWO ELEMENTS
 function switchActive(off,on){
