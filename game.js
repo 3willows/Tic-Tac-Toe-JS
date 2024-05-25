@@ -99,7 +99,7 @@ export function init(player, OPPONENT){
 
             // store the players move to gameData
             gameData[id] = player.computer;
-            console.log(gameData);
+            console.log(`gameData array : [${gameData}]`);
             
             // Get i,j of the space
             let space = getIJ(id);
