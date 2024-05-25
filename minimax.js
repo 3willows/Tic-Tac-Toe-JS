@@ -1,76 +1,75 @@
-import {player} from "./options.js" 
-import {isWinner, isTie} from "./game.js"
+import { player } from "./options.js"
+import { isWinner, isTie } from "./game.js"
 
-   // get empty spaces
-  function getEmptySpaces(gameData) {
-    let EMPTY = []
-    for (let id = 0; id < gameData.length; id++) {
-      if (!gameData[id]) EMPTY.push(id)
-    }
-    return EMPTY
+// get empty spaces
+function getEmptySpaces(gameData) {
+  let EMPTY = []
+  for (let id = 0; id < gameData.length; id++) {
+    if (!gameData[id]) EMPTY.push(id)
   }
-  
-  export function minimax(gameData, PLAYER) {
-    //base
-    if (isWinner(gameData, player.computer)) return { evaluation: +10 }
-    if (isWinner(gameData, player.man)) return { evaluation: -10 }
-    if (isTie(gameData)) return { evaluation: 0 }
+  return EMPTY
+}
 
-    //look for empty spaces
-    let EMPTY = getEmptySpaces(gameData)
+export function minimax(gameData, PLAYER) {
+  //base
+  if (isWinner(gameData, player.computer)) return { evaluation: +10 }
+  if (isWinner(gameData, player.man)) return { evaluation: -10 }
+  if (isTie(gameData)) return { evaluation: 0 }
 
-    //save the moves and their evualuation
-    let moves = []
+  //look for empty spaces
+  let EMPTY = getEmptySpaces(gameData)
 
-    //loop over the empty spaces for their evaluations
-    for (let i = 0; i < EMPTY.length; i++) {
-      let id = EMPTY[i]
+  //save the moves and their evualuation
+  let moves = []
 
-      //backup the space
-      let backup = gameData[id]
+  //loop over the empty spaces for their evaluations
+  for (let i = 0; i < EMPTY.length; i++) {
+    let id = EMPTY[i]
 
-      //make the move for the player
-      gameData[id] = PLAYER
+    //backup the space
+    let backup = gameData[id]
 
-      //save the move's id and evaluation
-      let move = {}
-      move.id = id
-      //the move evaluation
-      if (PLAYER == player.computer) {
-        move.evaluation = minimax(gameData, player.man).evaluation
-      } else {
-        move.evaluation = minimax(gameData, player.computer).evaluation
-      }
+    //make the move for the player
+    gameData[id] = PLAYER
 
-      //restore the move
-      gameData[id] = backup
-
-      //add the move to the moves array
-      moves.push(move)
-    }
-
-    // minimax algorithm
-    let bestMove
-
-    if (PLAYER == player.computer) {
-      //maximizer
-      let bestEvaluation = -Infinity
-      for (let i = 0; i < moves.length; i++) {
-        if (moves[i].evaluation > bestEvaluation) {
-          bestEvaluation = moves[i].evaluation
-          bestMove = moves[i]
-        }
-      }
+    //save the move's id and evaluation
+    let move = {}
+    move.id = id
+    //the move evaluation
+    if (PLAYER === player.computer) {
+      move.evaluation = minimax(gameData, player.man).evaluation
     } else {
-      //maximizer
-      let bestEvaluation = +Infinity
-      for (let i = 0; i < moves.length; i++) {
-        if (moves[i].evaluation < bestEvaluation) {
-          bestEvaluation = moves[i].evaluation
-          bestMove = moves[i]
-        }
-      }
+      move.evaluation = minimax(gameData, player.computer).evaluation
     }
-    return bestMove
+
+    //restore the move
+    gameData[id] = backup
+
+    //add the move to the moves array
+    moves.push(move)
   }
 
+  // minimax algorithm
+  let bestMove
+
+  if (PLAYER === player.computer) {
+    //maximizer
+    let bestEvaluation = -Infinity
+    for (let i = 0; i < moves.length; i++) {
+      if (moves[i].evaluation > bestEvaluation) {
+        bestEvaluation = moves[i].evaluation
+        bestMove = moves[i]
+      }
+    }
+  } else {
+    //maximizer
+    let bestEvaluation = +Infinity
+    for (let i = 0; i < moves.length; i++) {
+      if (moves[i].evaluation < bestEvaluation) {
+        bestEvaluation = moves[i].evaluation
+        bestMove = moves[i]
+      }
+    }
+  }
+  return bestMove
+}
