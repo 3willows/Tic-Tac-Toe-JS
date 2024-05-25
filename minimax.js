@@ -1,7 +1,16 @@
 import {player} from "./options.js" 
 import {isWinner, isTie} from "./game.js"
 
- export function minimax(gameData, PLAYER) {
+   // get empty spaces
+  function getEmptySpaces(gameData) {
+    let EMPTY = []
+    for (let id = 0; id < gameData.length; id++) {
+      if (!gameData[id]) EMPTY.push(id)
+    }
+    return EMPTY
+  }
+  
+  export function minimax(gameData, PLAYER) {
     //base
     if (isWinner(gameData, player.computer)) return { evaluation: +10 }
     if (isWinner(gameData, player.man)) return { evaluation: -10 }
@@ -65,11 +74,3 @@ import {isWinner, isTie} from "./game.js"
     return bestMove
   }
 
-  // get empty spaces
-  function getEmptySpaces(gameData) {
-    let EMPTY = []
-    for (let id = 0; id < gameData.length; id++) {
-      if (!gameData[id]) EMPTY.push(id)
-    }
-    return EMPTY
-  }
